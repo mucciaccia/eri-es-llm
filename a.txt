@@ -1,0 +1,8 @@
+# Python: Select Interpreter
+# huggingface-cli login
+pip install datasets
+pip install tokenizers
+pip install gensim
+pip install torch
+pip install transformers
+pip install transformers[torch]
