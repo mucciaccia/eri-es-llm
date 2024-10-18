@@ -1,5 +1,5 @@
 import torch
-from transformers import GPT2Tokenizer, GPT2Config, GPT2LMHeadModel, Trainer, TrainingArguments, DataCollatorForLanguageModeling
+from transformers import GPT2Tokenizer, GPT2LMHeadModel, Trainer, TrainingArguments, DataCollatorForLanguageModeling
 from datasets import load_from_disk
 
 dataset = load_from_disk('./shakespeare_sentences')
@@ -13,19 +13,7 @@ torch.manual_seed(12345)
 if torch.cuda.is_available():
     torch.cuda.manual_seed(12345)
 
-config = GPT2Config(
-    vocab_size=len(tokenizer),
-    n_positions=256,
-    n_ctx=256,
-    n_embd=768,
-    n_layer=12,
-    n_head=12,
-)
-
-torch.manual_seed(12345)
-torch.cuda.manual_seed(12345)
-
-model = GPT2LMHeadModel(config)
+model = GPT2LMHeadModel.from_pretrained("gpt2")
 model.to(device)
 
 def tokenize_function(examples):
