@@ -40,20 +40,20 @@ data_collator = DataCollatorForLanguageModeling(
 training_args = TrainingArguments(
     output_dir='./results',
     overwrite_output_dir=True,
-    num_train_epochs=1,
-    per_device_train_batch_size=8,
-    save_steps=500,
+    num_train_epochs=2,
+    per_device_train_batch_size=32,
+    save_steps=1000,
     save_total_limit=2,
-    logging_steps=100,
+    logging_steps=1000,
     prediction_loss_only=True,
-    learning_rate=5e-4,
+    learning_rate=5e-5,
     no_cuda=not torch.cuda.is_available(),
 )
 
 trainer = Trainer(
     model=model,
     args=training_args,
-    train_dataset=tokenized_dataset['test'],
+    train_dataset=tokenized_dataset['train'],
     data_collator=data_collator,
 )
 
